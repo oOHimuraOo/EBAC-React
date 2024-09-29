@@ -1,4 +1,4 @@
-import styles from './perfilInfo.module.css'
+import styles from './PerfilInfo.module.css'
 
 const InfosPerfil = ({seguidores, repos, seguindo}) => {
     return (
