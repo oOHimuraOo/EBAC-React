@@ -1,34 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react"
+import Perfil from "./components/Perfil/Index"
+import InfosPerfil from "./components/Perfil_info"
+import ReposList from "./components/Repos_list"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userInfo, setInfos] = useState([])
+  const usuario = 'oOHimuraOo'
+  const apiURL = `https://api.github.com/users/${usuario}`
+  
+    
+    useEffect(() => {
+        fetch(apiURL).then(res => res.json()).then(resJson => {
+            setInfos(resJson)
+        })
+    }, [apiURL])
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="container">
+      <Perfil nome={userInfo.name} avatar={userInfo.avatar_url} usuario={userInfo.login}/>
+      <InfosPerfil seguidores={userInfo.followers} repos={userInfo.public_repos} seguindo={userInfo.following} />
+      <ReposList url={userInfo.repos_url} />
+      {/* <Formulario /> */}
+    </div>
   )
 }
 
