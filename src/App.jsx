@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Perfil from "./components/Perfil/Index"
+import Perfil from "./components/Perfil"
 import InfosPerfil from "./components/Perfil_info"
 import ReposList from "./components/Repos_list"
 
